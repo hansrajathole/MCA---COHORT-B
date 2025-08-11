@@ -11,7 +11,7 @@
 // fun()
 
 
-// function expression 
+// function expression
 // let sum = function (a, b) {
 //     console.log(a+b); 
 // }
@@ -20,7 +20,6 @@
 // Arrow function 
 // let chacha = ()=>{
 //     console.log("red");
-    
 // }
 
 // chacha()
@@ -47,9 +46,12 @@
 // fun(10,20)
 
 // function person( age = "99", name) {
+//     let n = prompt("enter any value")
 //     console.log(name);
 //     console.log(age);
-//     console.log(typeof age);
+//     console.log(n);
+    
+//     // console.log(typeof age);
  
 // }
 

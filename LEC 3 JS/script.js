@@ -14,7 +14,7 @@
 
 
 // filter 
-let arr = [1,2,3,4,5,6,7,8,9]
+// let arr = [1,2,3,4,5,6,7,8,9]
 // let filteredArr = arr.filter((elem , index)=>{
 //     if(elem % 2 == 0){
 //         return elem  
@@ -39,12 +39,12 @@ let arr = [1,2,3,4,5,6,7,8,9]
 
 // forEach 
 
-// const newArr = arr.forEach((elem , index)=>{
-//     if(index >= 5){
-//         console.log(elem);
+const newArr = arr.forEach((elem , index)=>{
+    if(index >= 5){
+        console.log(elem);
         
-//     }
-// })
+    }
+})
 
 
 // console.log(newArr);
@@ -52,7 +52,6 @@ let arr = [1,2,3,4,5,6,7,8,9]
 
 // Object 
 // console.log(this);
-
 
 
 const person = {
@@ -71,6 +70,17 @@ const person = {
     }
 
 }
+
+
+
+let product = {
+    title : "watch",
+    price : 2000,
+    colour : "black",
+    brand : "fire boltt",
+}
+
+
 // person.fun()
 // person.age = 25
 // person.course = "MCA"
