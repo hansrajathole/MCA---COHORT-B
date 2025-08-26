@@ -2,9 +2,141 @@ const http = require("http")
 
 
 
-let chacha = http.createServer((req, res)=>{
+let server = http.createServer((req, res)=>{
     if(req.url === "/" && req.method === "GET" ){
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
         res.end("Home route")
+
     }
 
     if(req.url === "/about"){
@@ -15,7 +147,7 @@ let chacha = http.createServer((req, res)=>{
 
 
 
-chacha.listen(4000 , ()=>{
+server.listen(4000 ,  ()=>{
     console.log("server is running on port no : 3000");
     
 })
