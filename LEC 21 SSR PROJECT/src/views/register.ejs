@@ -1,52 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
 
-     <style>
-        body { font-family: Arial, sans-serif; }
-        .register-form {
-            max-width: 400px;
-            margin: 40px auto;
-            padding: 24px;
-            border: 1px solid #ccc;
-            border-radius: 8px;
-            background: #f9f9f9;
-        }
-        .register-form h2 {
-            text-align: center;
-            margin-bottom: 24px;
-        }
-        .register-form label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: bold;
-        }
-        .register-form input {
-            width: 100%;
-            padding: 8px;
-            margin-bottom: 16px;
-            border-radius: 4px;
-            border: 1px solid #aaa;
-        }
-        .register-form button {
-            width: 100%;
-            padding: 10px;
-            background: #007bff;
-            color: #fff;
-            border: none;
-            border-radius: 4px;
-            font-size: 16px;
-            cursor: pointer;
-        }
-        .register-form button:hover {
-            background: #0056b3;
-        }
-    </style>
-</head>
-<body>
+<%- include("partial/header.ejs" , {title}) %>
+
+
     <form class="register-form" action="/users/register" method="POST">
         <h2>Register</h2>
         <label for="username">Username</label>
@@ -59,6 +14,8 @@
         <input type="password" id="password" name="password" required>
 
         <button type="submit">Register</button>
+
+        <p>if you have already an account? <a href="/users/login">login</a></p>
     </form>
-</body>
-</html>
+
+<%- include("partial/footer.ejs") %>
