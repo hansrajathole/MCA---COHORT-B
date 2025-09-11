@@ -19,7 +19,7 @@ const postSchema = mongoose.Schema({
      required : true
 
    },
-   tag : {
+   tags : {
     type : String
    }
 })

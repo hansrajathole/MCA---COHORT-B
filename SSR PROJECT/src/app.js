@@ -1,6 +1,9 @@
 const express = require("express")
 const userRouter = require("../src/routes/user.router")
 const authRouter = require("../src/routes/auth.router")
+const postRouter = require("../src/routes/post.router")
+
+
 const morgan = require("morgan")
 const session = require('express-session')
 const path = require("path")
@@ -25,6 +28,7 @@ app.use(express.static(path.join(__dirname,"../public/css")))
 
 app.use("/", authRouter)
 app.use("/users",userRouter)
+app.use("/posts", postRouter)
 
 
 
