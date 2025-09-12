@@ -109,3 +109,17 @@ module.exports.logoutController = function (req, res) {
        
     }
 }
+
+
+module.exports.profileController = async (req, res) => {
+    try {
+        const userId = req.params.userId
+        const user = await userModel.findById(userId)
+
+        res.render("profile" , {title : "profile page" , user})
+    } catch (error) {
+        console.log(error.message);
+        res.status(500).json({message : "internal server error" , error : error.message})
+       
+    }
+}

@@ -13,7 +13,7 @@ const userSchema = mongoose.Schema({
     },
     profile : {
         type : String,
-        default : "https://i.sstatic.net/l60Hf.png"
+        default : "https://static.vecteezy.com/system/resources/previews/009/292/244/non_2x/default-avatar-icon-of-social-media-user-vector.jpg"
     },
     password : {
         type : String ,
