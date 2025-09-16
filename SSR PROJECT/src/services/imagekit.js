@@ -6,7 +6,7 @@ const config = require("../config/config");
 var imagekit = new ImageKit({
   publicKey: config.imageKit_public_key,
   privateKey: config.imageKit_private_key,
-  urlEndpoint: "https://ik.imagekit.io/ls436o8px",
+  urlEndpoint: "https://ik.imagekit.io/dt5roofaq",
 });
 
 async function upload(profile) {
