@@ -1,16 +1,5 @@
 const postModel = require("../models/posts.model");
 
-module.exports.getCreateController = (req, res)=>{
-    try {
-        
-        res.render("create.ejs", {title : "create page"})
-
-    } catch (error) {
-        console.log(error.message);
-        res.status(500).json({message :"internal server error", error :error.message })
-        
-    }
-}
 
 
 module.exports.postCreateController = async (req,res)=>{
@@ -19,7 +8,7 @@ module.exports.postCreateController = async (req,res)=>{
         const {title , content , image , tags} = req.body
 
         if(!title || !content || !image){
-            return res.render("create.ejs")
+            return res.status(400).json({message : "all field are required"})
         }
 
         const userId = req.userId
@@ -32,7 +21,8 @@ module.exports.postCreateController = async (req,res)=>{
             tags : tags
         })
 
-        res.redirect("/")
+        res.status(201).json({message : "post create successfully" , post})
+
         
     } catch (error) {
         console.log(error.message);
@@ -42,20 +32,7 @@ module.exports.postCreateController = async (req,res)=>{
 }
 
 
-module.exports.getUpdateController = async (req, res) => {
-    try {
-        const postId = req.params.id
 
-        const post = await postModel.findById(postId)
-
-        res.render("update.ejs", {post , title : "update page"})
-
-    } catch (error) {
-        console.log(error.message);
-        res.status(500).json({message :"internal server error", error :error.message })
-           
-    }
-}
 
 module.exports.postUpdateController = async (req ,res) => {
     try {
@@ -71,7 +48,7 @@ module.exports.postUpdateController = async (req ,res) => {
 
         await post.save()
 
-        res.redirect("/")
+        res.status(200).json({message : "post update succcefully" , post})
 
 
     } catch (error) {
@@ -88,7 +65,7 @@ module.exports.deletePostController = async (req ,res) => {
 
         await postModel.findByIdAndDelete(postId)
 
-        res.redirect("/")
+        res.status(200).json({message : "post delete successfully"})
     } catch (error) {
         console.log(error.message);
         res.status(500).json({message :"internal server error", error :error.message })

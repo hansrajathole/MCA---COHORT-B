@@ -3,11 +3,13 @@ const postModel = require("../models/posts.model");
 module.exports.indexController = async function (req, res) {
     try {
 
-
-        const user = req.session.user || null
         const posts = await postModel.find().populate("author")
 
-        res.render("index.ejs", {title : "Home page" , user : user , posts })
+        if(posts.length === 0){
+            res.status(200).json({message : "posts data not found"})
+        }
+
+        res.status(200).json({message : "posts data found" , posts})
     
         
     } catch (error) {

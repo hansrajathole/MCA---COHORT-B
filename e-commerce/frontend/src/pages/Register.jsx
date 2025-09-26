@@ -10,8 +10,15 @@ const Register = () => {
 
     const handleSubmit = (e)=>{
         e.preventDefault()
-        console.log(username , email , password);
-        axios.post("http://localhost:4000/users/login")
+       
+        axios.post("http://localhost:4000/users/register", {username , email , password})
+        .then((res)=>{
+          console.log(res);
+        })
+        .catch((err)=>{
+          console.log(err);
+          
+        })
     }
 
   return (
@@ -66,7 +73,7 @@ const Register = () => {
         <div className='flex justify-center'>
             <button 
             onClick={handleSubmit}
-            className='text-center border border-black bg-blue-500 text-white py-1 px-3 rounded-2xl'>Login</button>
+            className='text-center border border-black bg-blue-500 text-white py-1 px-3 rounded-2xl'>register</button>
         </div>
         <br />
         <p>if you have an account? <a href="/login">Sign-in</a></p>

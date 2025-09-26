@@ -6,18 +6,6 @@ const upload = require("../services/imagekit")
 
 
 
-
-module.exports.loginGetController = function(req ,res){
-    try {
-        
-        res.render("login.ejs", {title : "Login page"})
-    } catch (error) {
-        console.log(error.message);
-        res.status(500).json({message : "internal server error" , error : error.message})
-        
-    }
-}
-
 module.exports.loginPostController = async function (req ,res) {
 
     try {
@@ -61,22 +49,31 @@ module.exports.loginPostController = async function (req ,res) {
 }
 
 
-module.exports.registerGetController = function(req, res) {
-    try {
-        
-        res.render("register.ejs", {title : "register page"})
-        
-    } catch (error) {
-        console.log(error.message);
-        res.status(500).json({message : "internal server error" , error : error.message})
-        
-    }
-}
+
 
 module.exports.registerPostController = async function(req, res) {
     try {
         
         const {username , email , password} = req.body
+
+
+        if(!username){
+            res.status(400).json({message : "username must be required"})
+        }
+
+        if(!email){
+            res.status(400).json({message : "email must be required"})
+        }
+
+        if(!password){
+            res.status(400).json({message : "password must be required"})
+        }
+
+        const alreadyExist = await userModel.findOne({email : email})
+
+        if(alreadyExist){
+            res.status(400).json({message : "email already exist"})
+        }
 
         const hashedPass = await bcrypt.hash(password, 10)
 
@@ -86,7 +83,18 @@ module.exports.registerPostController = async function(req, res) {
             password : hashedPass
         })
 
-        res.redirect("/users/login")
+        
+        const token = await jwt.sign({
+
+            id : user._id ,
+            username : user.username ,
+            email : user.email
+
+        },config.JWT_SECRET)
+
+        delete user._doc.password
+
+        res.status(201).json({message : "register successful" , user , token})
 
     } catch (error) {
         console.log(error.message);
@@ -117,7 +125,8 @@ module.exports.profileController = async (req, res) => {
         const userId = req.params.userId
         const user = await userModel.findById(userId)
 
-        res.render("profile" , {title : "profile page" , user})
+        res.status(200).json({message : "user profile data" , user})
+
     } catch (error) {
         console.log(error.message);
         res.status(500).json({message : "internal server error" , error : error.message})
@@ -126,28 +135,9 @@ module.exports.profileController = async (req, res) => {
 }
 
 
-module.exports.getUpdateController = async (req, res) => {
-    try {
-
-        const userId = req.params.userId
-
-        const user = await userModel.findById(userId)
-
-        res.render("updateProfile", {title : "update page" , user})
-
-    } catch (error) {
-        console.log(error.message);
-        res.status(500).json({message : "internal server error" , error : error.message})
-     
-    }
-}
-
 module.exports.postUpdateController = async (req , res) => {
     try {
-        console.log("file wala data",req.file);
-        console.log("body wala data",req.body);
-        
-        
+      
         const profile = req.file
         const {username} = req.body
         const userId = req.params.userId
@@ -171,7 +161,7 @@ module.exports.postUpdateController = async (req , res) => {
 
         await user.save()
 
-        res.redirect(`/users/profile/${userId}`)
+        res.status(200).json({message : "profile update successfully" , user})
 
         
     } catch (error) {
