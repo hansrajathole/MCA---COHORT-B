@@ -1,27 +1,28 @@
-const postModel = require("../models/posts.model");
+const productModel = require("../models/product.model");
 
 
 
-module.exports.postCreateController = async (req,res)=>{
+module.exports.productCreateController = async (req,res)=>{
     try {
         
-        const {title , content , image , tags} = req.body
+        const {title , description , image , price , category} = req.body
 
-        if(!title || !content || !image){
-            return res.status(400).json({message : "all field are required"})
+        if(!title || !description || !image || !price || !category){
+            return res.status(400).json({message : "all fields are required"})
         }
 
         const userId = req.userId
 
-        const post = await postModel.create({
+        const product = await productModel.create({
             author : userId,
-            title : title,
-            image : image, 
-            content : content,
-            tags : tags
+            title ,
+            image , 
+            description,
+            price,
+            category
         })
 
-        res.status(201).json({message : "post create successfully" , post})
+        res.status(201).json({message : "product created successfully" , product})
 
         
     } catch (error) {
@@ -39,7 +40,7 @@ module.exports.postUpdateController = async (req ,res) => {
         const postId = req.params.id
         const {title , content , image , tags} = req.body
 
-        const post = await postModel.findById(postId)
+        const post = await productModel.findById(postId)
 
         post.title = title || post.title
         post.content = content || post.content
@@ -63,7 +64,7 @@ module.exports.deletePostController = async (req ,res) => {
     try {
         const postId = req.params.id
 
-        await postModel.findByIdAndDelete(postId)
+        await productModel.findByIdAndDelete(postId)
 
         res.status(200).json({message : "post delete successfully"})
     } catch (error) {

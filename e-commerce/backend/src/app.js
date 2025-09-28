@@ -1,7 +1,7 @@
 const express = require("express")
 const userRouter = require("../src/routes/user.router")
 const authRouter = require("../src/routes/auth.router")
-const postRouter = require("../src/routes/post.router")
+const productRouter = require("../src/routes/product.router")
 const cookieParser = require("cookie-parser")
 const morgan = require("morgan")
 const session = require('express-session')
@@ -36,7 +36,7 @@ app.use(express.urlencoded({extended : true}))
 
 app.use("/", authRouter)
 app.use("/users",userRouter)
-app.use("/posts", postRouter)
+app.use("/products",productRouter )
 
 
 

@@ -4,10 +4,13 @@ const userModel = require("../models/user.model")
 
 async function protected(req , res, next) {
     try {
-        const token = req.session.token
-
+        console.log(req.headers);
+        
+        const token = req.headers?.authorization?.split(" ")[1]
+        console.log(token);
+        
         if(!token){
-            return res.redirect("/users/login")
+            return res.status(401).json({message : "unauthorized user"})
         }
 
 
@@ -16,7 +19,7 @@ async function protected(req , res, next) {
         const user = await userModel.findById(decode.id)
 
         if(!user){
-            return res.redirect("/users/register")
+            return res.status(401).json({message : "unauthorized user"})
         }
 
         req.userId = decode.id
