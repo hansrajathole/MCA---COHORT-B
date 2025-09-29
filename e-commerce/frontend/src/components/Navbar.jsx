@@ -1,8 +1,13 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
 const Navbar = () => {
-
+    const token = localStorage.getItem("token")
     const navigate = useNavigate()
+
+    const handleLogout = ()=>{
+      localStorage.removeItem("token")
+      navigate("/login")
+    }
 
   return (
     <div className='h-18 w-full bg-red-300 flex justify-between text-center items-center px-5'>
@@ -14,12 +19,21 @@ const Navbar = () => {
             <i className="ri-search-line"></i>
         </div>
         <div className='flex gap-5'>
-          <button
+          {
+            token && <button
         onClick={()=>{navigate("/create")}}
         className='border border-black p-2 rounded-2xl bg-emerald-300 text-white cursor-pointer'>Create Product</button>
-        <button 
+          }
+
+        {
+          token ? <button 
+        onClick={handleLogout}
+        className='border border-black p-2 rounded-2xl bg-blue-300 text-white cursor-pointer'>Logout</button> :
+          <button 
         onClick={()=>{navigate("/login")}}
         className='border border-black p-2 rounded-2xl bg-blue-300 text-white cursor-pointer'>Login</button>
+        }
+
         </div>
     </div>
   )

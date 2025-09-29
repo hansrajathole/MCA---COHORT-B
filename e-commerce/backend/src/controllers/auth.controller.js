@@ -3,13 +3,13 @@ const productModel = require("../models/product.model");
 module.exports.indexController = async function (req, res) {
     try {
 
-        const posts = await productModel.find().populate("author")
+        const products = await productModel.find().populate("author")
 
-        if(posts.length === 0){
-            res.status(200).json({message : "posts data not found"})
+        if(products.length === 0){
+           return res.status(200).json({message : "products data not found"})
         }
 
-        res.status(200).json({message : "posts data found" , posts})
+        res.status(200).json({message : "products data found" , products})
     
         
     } catch (error) {
