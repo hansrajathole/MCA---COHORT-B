@@ -5,6 +5,7 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import CreateProduct from "./pages/CreateProduct";
 import Home from "./pages/Home";
+import ProductDetail from "./pages/ProductDetail";
 
 const App = () => {
   
@@ -23,6 +24,8 @@ const App = () => {
       
       <Route path='/about' element={<h1>About</h1>}/>
       <Route path='/create' element={<CreateProduct/>}/>
+      <Route path='/products/detail/:productId' element={<ProductDetail/>}/>
+
     </Routes>
     </>
   );

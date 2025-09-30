@@ -1,7 +1,7 @@
 import axios from 'axios'
 import React from 'react'
 import { useState } from 'react'
-
+import { useNavigate } from 'react-router-dom'
 const CreateProduct = () => {
 
 
@@ -13,6 +13,8 @@ const CreateProduct = () => {
 
     const token = localStorage.getItem("token")
 
+
+    const navigate = useNavigate()
 
     const handleSubmit = (e)=>{
         e.preventDefault()
@@ -29,6 +31,7 @@ const CreateProduct = () => {
         })
         .then((res)=>{
             console.log(res);
+            navigate("/")
             
             
         })
