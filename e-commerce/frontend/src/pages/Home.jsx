@@ -47,8 +47,8 @@ const Home = () => {
                         <h1 className='font-semibold text-2xl'>{product.title }</h1>
                         <h1 className='font-semibold text-xl'>Price : ₹{product.price }</h1>
                         <div className='flex justify-between mt-3'>
-                            <button className='bg-blue-400 rounded-xl px-3 py-2 shadow-md shadow-blue-300 '>Buy Now</button>
-                            <button className='bg-green-300 rounded-xl px-3 py-2 shadow-md shadow-green-300'>Add to Cart</button>
+                            <button className='bg-blue-400 rounded-xl px-3 py-2 shadow-md shadow-blue-300 '>Edit</button>
+                            <button className='bg-green-300 rounded-xl px-3 py-2 shadow-md shadow-green-300'>Delete</button>
                         </div>
                     </div>
                 </div>

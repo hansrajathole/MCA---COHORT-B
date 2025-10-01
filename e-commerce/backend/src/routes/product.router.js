@@ -7,7 +7,9 @@ const productControllers = require("../controllers/product.controller")
 
 router.post("/create", protected, productControllers.productCreateController)
 router.post("/update/:id", protected , productControllers.postUpdateController)
-router.delete("/delete/:id", protected , productControllers.deletePostController)
+router.delete("/delete/:productId", protected , productControllers.deletePostController)
+router.get("/details/:productId", protected , productControllers.productDetailController )
+
 
 
 

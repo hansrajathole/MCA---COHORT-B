@@ -1,3 +1,4 @@
+const { json } = require("express");
 const productModel = require("../models/product.model");
 
 
@@ -62,11 +63,36 @@ module.exports.postUpdateController = async (req ,res) => {
 
 module.exports.deletePostController = async (req ,res) => {
     try {
-        const postId = req.params.id
+        const productId = req.params.productId
 
-        await productModel.findByIdAndDelete(postId)
+        await productModel.findByIdAndDelete(productId)
 
-        res.status(200).json({message : "post delete successfully"})
+        res.status(200).json({message : "post deleted successfully"})
+    } catch (error) {
+        console.log(error.message);
+        res.status(500).json({message :"internal server error", error :error.message })
+       
+    }
+}
+
+
+module.exports.productDetailController = async (req , res) => {
+    try {
+        const productId = req.params.productId
+
+        if(!productId){
+            return res.status(400).json({message : "productId is required"})
+        }
+
+        const product = await productModel.findById(productId)
+
+        if(!product){
+            return res.status(400).json({message : "product not found"})
+        }
+
+        res.status(200).json({message :"product detail found", product })
+
+
     } catch (error) {
         console.log(error.message);
         res.status(500).json({message :"internal server error", error :error.message })
