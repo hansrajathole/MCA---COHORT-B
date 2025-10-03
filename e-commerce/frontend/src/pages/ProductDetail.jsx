@@ -1,7 +1,7 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
-
+import Button from '../components/Button'
 
 const ProductDetail = () => {
 
@@ -52,8 +52,12 @@ const ProductDetail = () => {
        })
     }
 
+    const editHandle = (productId)=>{
+        navigate(`/products/update/${productId}`)
+    }
+
   return (
-    <div className='h-screen w-full bg-amber-200 flex justify-center items-center'>
+    <div className='h-screen w-full flex justify-center items-center'>
         <div className='h-[80%] w-[80%] border border-black flex'>
           <div className="left h-full w-[50%]">
             <img src={productDetail.image} alt="" className='w-auto h-full object-contain'/>
@@ -69,14 +73,16 @@ const ProductDetail = () => {
             <br />
             
             <div className='flex justify-between mt-3'>
-                <button className='bg-blue-400 rounded-xl px-3 py-2 shadow-md shadow-blue-300 '>Edit</button>
-                <button className='bg-green-300 rounded-xl px-3 py-2 shadow-md shadow-green-300'
-                onClick={()=>{deleteHandle(productDetail._id)}}
-                >Delete</button>
+                <Button name={"Delete"} handlefunction={deleteHandle} productId={productId}/>
+                <Button name={"Edit"} handlefunction={editHandle} productId={productId}/>
             </div>
           </div>
         </div>
+         <div>
+      
     </div>
+    </div>
+   
   )
 }
 

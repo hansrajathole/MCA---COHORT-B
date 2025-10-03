@@ -36,27 +36,53 @@ module.exports.productCreateController = async (req,res)=>{
 
 
 
-module.exports.postUpdateController = async (req ,res) => {
+module.exports.productUpdateController = async (req ,res) => {
     try {
-        const postId = req.params.id
-        const {title , content , image , tags} = req.body
+        const productId = req.params.productId
+        const {title , description , image , category , price} = req.body
 
-        const post = await productModel.findById(postId)
+        const product = await productModel.findById(productId)
 
-        post.title = title || post.title
-        post.content = content || post.content
-        post.image = image || post.image
-        post.tags = tags || post.tags
+        product.title = title || product.title
+        product.description = description || product.description
+        product.image = image || product.image
+        product.category = category || product.category
+        product.price = price || product.price
 
-        await post.save()
+        await product.save()
 
-        res.status(200).json({message : "post update succcefully" , post})
+        res.status(200).json({message : "post update succcefully" , product})
 
 
     } catch (error) {
         console.log(error.message);
         res.status(500).json({message :"internal server error", error :error.message })
         
+    }
+}
+
+module.exports.getUpdateController = async (req , res) => {
+    try {
+        const productId = req.params.productId
+
+        if(!productId){
+            return res.status(400).json({message : "productId is required"})
+        }
+        console.log(productId);
+        
+        const product = await productModel.findById(productId)
+
+        if(!product){
+            return res.status(400).json({message : "product not found"})
+        }
+        console.log(product);
+        
+        res.status(200).json({message : "product data found" , product})
+
+    } catch (error) {
+        console.log(error.message);
+        res.status(500).json({message :"internal server error", error :error.message })
+       
     }
 }
 
